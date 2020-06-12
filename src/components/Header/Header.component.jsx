@@ -1,16 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-import {auth} from '../../firebase/firebase.utils'
+import { auth } from "../../firebase/firebase.utils";
+import CustomButton from "../CustomButton/CustomButton.component";
 
-const Header = ({currentUser}) => (
-  <div >
-    {/* <Link  to="/">
-      Contact
-    </Link> */}
-    {/* {console.log(currentUser)} */}
-    {currentUser ? <div onClick={() => auth.signOut()}>Sign Out</div> : <Link to='signin'>Sign In</Link>}
-  </div>
+// import "./Header.styles.scss";
+
+import {HeaderContainer} from './Header.styles'
+
+const Header = ({ currentUser }) => (
+  <HeaderContainer className={currentUser ? "header" : "false-header"}>
+    {currentUser ? (
+      <CustomButton onClick={() => auth.signOut()}>Sign Out</CustomButton>
+    ) : (
+      <Redirect to="/signin"></Redirect>
+    )}
+  </HeaderContainer>
 );
 
 export default Header;

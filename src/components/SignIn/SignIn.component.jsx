@@ -1,50 +1,66 @@
 import React, { useState } from "react";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+
+import FormInput from "../FormInput/FormInput.component";
+import CustomButton from '../CustomButton/CustomButton.component'
+
+import {SignInContainer} from './SignIn.styles'
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setEmail("");
-    setPassword("");
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.log("error", error.message);
+    }
   };
 
   const handleChange = (event) => {
-    if (event.target.name === "email") {
-      setEmail(event.target.value);
+    const { name, value } = event.currentTarget;
+    if (name === "email") {
+      setEmail(value);
     } else {
-      setPassword(event.target.value);
+      setPassword(value);
     }
-    // console.log(event.target.value);
   };
 
   return (
-    <div>
-      <h3>Sign in with your email and password</h3>
+    <SignInContainer>
+      <h1>Sign in with your email and password</h1>
+
       <form onSubmit={handleSubmit}>
-        <input
+        <FormInput
+          label="email"
           name="email"
           type="email"
           value={email}
           onChange={handleChange}
+          autoComplete="email"
           required
         />
-        <label>Email</label>
-        <input
+
+        <FormInput
+          label="password"
           name="password"
           type="password"
           value={password}
           onChange={handleChange}
+          autoComplete="password"
           required
         />
-        <label>Password</label>
-        <button>Sign in</button>
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
+
+        <CustomButton type="submit">Sign In</CustomButton>
+        <CustomButton onClick={signInWithGoogle}>Sign in with Google</CustomButton>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

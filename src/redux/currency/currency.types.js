@@ -1,0 +1,7 @@
+const currencyActionTypes = {
+  GET_CURRENCY_START: "GET_CURRENCY_START",
+  GET_CURRENCY_SUCCES: "GET_CURRENCY_SUCCES",
+  GET_CURRENCY_FAILED: "GET_CURRENCY_FAILED",
+};
+
+export default currencyActionTypes;

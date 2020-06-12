@@ -1,0 +1,26 @@
+.header {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 0 16px;
+  background-color:  #1A1A15;
+
+  .options {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .option {
+      padding: 10px 15px;
+    }
+  }
+}
+
+
+.false-header {
+  display: none;
+}
